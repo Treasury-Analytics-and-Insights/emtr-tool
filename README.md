@@ -1,6 +1,6 @@
 # EMTR Scenario Family Tool
 
-Developed @ The Treasury - New Zealand
+Currently under development @ The Treasury - New Zealand
 
 ## Deployment
 1. Use `shinylive::export(appdir = "app", destdir = "docs") to generate shinylive output`
