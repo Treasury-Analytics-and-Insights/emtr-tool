@@ -124,7 +124,7 @@ shinyUI(fluidPage(
   # Very basic overview of the tool
   tabPanel("About", 
            mainPanel(h2("About the Tool"),
-                     p("This tool is designed to make support policy analysts in understanding the EMTR profiles faced by a range of different scenario families in order to help inform the design of Tax and Welfare policy. "),
+                     p("This tool is designed to support policy analysts in understanding the EMTR profiles faced by a range of different scenario families in order to help inform the design of Tax and Welfare policy. "),
                      h2("Analytics & Insights - The Treasury"),
                      p("The EMTR Scenario Family tool was developed by the Analytics & Insights team in the New Zealand Treasury's Office of the Chief Economic Adviser.")
   ))
