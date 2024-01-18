@@ -1,9 +1,7 @@
 parameters_from_file <- function(parameters_file) {
-  # source("C:\\LiamB\\EMTR Tool\\IncomeExplorer-master\\IncomeExplorer-master\\R\\hard_load.R")
-  # return(get_parameters())
-  parameters = get_parameters()
-  # parameters_df <- openxlsx::read.xlsx(parameters_file)
-  # parameters <- parameters_from_df(parameters_df)
+  parameters_df <- openxlsx::read.xlsx(parameters_file)
+  parameters <- parameters_from_df(parameters_df)
+  
   return(parameters)
 }
 

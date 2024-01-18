@@ -276,92 +276,15 @@ choose_IWTC_or_benefit <- function(X, X_without_IWTC) {
   SQ_net_income_comparison[, row_ID := 1:.N]
   With_IWTC_indices <- SQ_net_income_comparison[With_IWTC >= Without_IWTC, row_ID]
   Without_IWTC_indices <- SQ_net_income_comparison[Without_IWTC > With_IWTC, row_ID]
-  
+
   With_IWTC <- X[With_IWTC_indices]
   Without_IWTC <- X_without_IWTC[Without_IWTC_indices]
-  
+
   X <- rbind(With_IWTC, Without_IWTC)
   setorderv(X, "hours1")
-  
+
   X[, EMTR := 1 - 1L*(shift(Net_Income,1L,type="lead")-Net_Income)]
   X[, EMTR := zoo::na.locf(EMTR)]
-  
+
   return(X)
 }
-
-# plotly - income composition
-plot_income_decomposition <- function(comebined_data, scenario_name, set_tsy_palette) {
-  plot_ly(comebined_data[Scenario == scenario_name &
-                           hours1 <= 50,]) %>%
-    add_trace(x=~hours1, y=~0, line=list(width = 0), xaxis="x2",
-              showlegend=FALSE, inherit=FALSE, 
-              hoverinfo = "none", type = "scatter", mode = "lines") %>%
-    layout(xaxis2 = list(overlaying = "x", nticks = 10, side = "top",
-                         title = "Hours/week", automargin=TRUE, size=8,
-                         showline = TRUE),
-           xaxis = list(title = "Annual gross wage income ($)", 
-                        tickformat = "$", 
-                        automargin=TRUE,
-                        zeroline = TRUE,
-                        showline = TRUE,
-                        mirror=TRUE),
-           yaxis = list (title = "Income ($)", tickformat = "$", 
-                         automargin=TRUE,
-                         zeroline = TRUE,
-                         showline = TRUE,
-                         mirror=TRUE),
-           legend = list(x = 100, y = 0.5),
-           hovermode = "compare")  %>% 
-    add_trace(x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-              y = ~wage_tax_and_ACC, name = 'Tax on Wage and ACC', 
-              fillcolor = set_tsy_palette[13], stackgroup = 'one',
-              hovertemplate = paste("Tax on Wage and ACC: %{y:$,.0f}<extra></extra>"))  %>%
-    add_trace(x = ~gross_wage1_annual, type = 'scatter', mode = 'none', 
-              y = ~benefit_tax, name = "Tax on Core Benefit", 
-              fillcolor = set_tsy_palette[12], stackgroup = 'one',
-              hovertemplate = paste("Tax on Core Benefit: %{y:$,.0f}<extra></extra>"))  %>%
-    add_trace(x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-              y = ~net_wage2, name = 'Net Wage (Partner)', stackgroup = 'two', 
-              fillcolor = set_tsy_palette[11],
-              hovertemplate = paste("Net Wage (Partner): %{y:$,.0f}<extra></extra>")) %>% 
-    add_trace(x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-              y = ~net_wage1, name = 'Net Wage', stackgroup = 'two',
-              fillcolor = set_tsy_palette[10],
-              hovertemplate = paste("Net Wage: %{y:$,.0f}<extra></extra>")) %>% 
-    add_trace(x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-              y = ~net_benefit, name = 'Net Core Benefit',
-              fillcolor = set_tsy_palette[9], stackgroup = 'two',
-              hovertemplate = paste("Net Core Benefit: %{y:$,.0f}<extra></extra>"))  %>% 
-    
-    add_trace(x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-              y = ~IETC_abated, name = 'IETC',
-              fillcolor = set_tsy_palette[7], stackgroup = 'two',
-              hovertemplate = paste("IETC: %{y:$,.0f}<extra></extra>")) %>% 
-    add_trace(x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-              y = ~MFTC, name = 'MFTC', 
-              fillcolor = set_tsy_palette[6], stackgroup = 'two',
-              hovertemplate = paste("MFTC: %{y:$,.0f}<extra></extra>"))  %>%
-    add_trace( x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-               y = ~FTC_abated, name = 'FTC',
-               fillcolor = set_tsy_palette[5], stackgroup = 'two',
-               hovertemplate = paste("FTC: %{y:$,.0f}<extra></extra>"))  %>%
-    add_trace( x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-               y = ~IWTC_abated, name = 'IWTC',
-               fillcolor = set_tsy_palette[4], stackgroup = 'two',
-               hovertemplate = paste("IWTC: %{y:$,.0f}<extra></extra>")) %>% 
-    add_trace( x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-               y = ~AS_Amount,
-               name = 'Accommodation Supplement',
-               fillcolor = set_tsy_palette[3], stackgroup = 'two',
-               hovertemplate = paste("Accommodation Supplement: %{y:$,.0f}<extra></extra>")) %>%
-    add_trace( x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-               y = ~WinterEnergy, name = 'Winter Energy',
-               fillcolor = set_tsy_palette[2], stackgroup = 'two',
-               hovertemplate = paste("Winter Energy: %{y:$,.0f}<extra></extra>")) %>%
-    add_trace( x = ~gross_wage1_annual, type = 'scatter', mode = 'none',
-               y = ~BestStart_Total, 
-               name = 'Best Start', fillcolor = set_tsy_palette[1], 
-               stackgroup = 'two',
-               hovertemplate = paste("Best Start: %{y:$,.0f}<extra></extra>")) 
-}
-
