@@ -52,7 +52,7 @@ shinyServer(function(input, output, session) {
   
   # calculate incomes 
   calculate_income <- reactive({
-    parameters = req(reload_data()) # req
+    parameters = req(reload_data())
     
     # convert inputs
     MAX_WAGE <- 50*input$wage1_hourly 
