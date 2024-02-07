@@ -1,5 +1,6 @@
 get_parameters = function() {
-  params = list(modelyear = 2024, ACC_LevyRate = 0.0153, 
+  params = list(modelyear = 2024, 
+                ACC_LevyRate = 0.0153, 
                 ACC_MaxLeviableIncome = 139384,
                 Accommodation_AbatementRate = 0.25, 
                 Accommodation_BaseRateThreshold_Mortgage = 0.3,
@@ -28,8 +29,6 @@ get_parameters = function() {
                 Benefits_Entitlement_Age_SPS_ChildLowerBound = 14, 
                 Benefits_WinterEnergy_Rates_Single = 450,
                 Benefits_WinterEnergy_Rates_CoupleOrDeps = 700, 
-                Benefits_LivingAlonePayment_Single = 0,
-                Benefits_LivingAlonePayment_SoleParent = 0, 
                 FamilyAssistance_Abatement_AbatementScale = structure(c(0, 42700, 0, 0.27), dim = c(2L, 2L)), 
                 FamilyAssistance_Abatement_Order = 0,
                 FamilyAssistance_FTC_Rates_FirstChild = 7121, 
@@ -51,8 +50,6 @@ get_parameters = function() {
                 IETC_AbatementScale = structure(c(0, 44000, 0, 0.13), dim = c(2L, 2L)), 
                 IETC_MinimalIncome = 24000,
                 IETC_PerYear = 520, IETC_OnlyFamiliesWithoutChildren = 0,
-                EITC_ApplyEITC = 0, EITC_AbatementScale = structure(c(0, 0, 0, 0), dim = c(2L, 2L)), 
-                EITC_ExcludeFamiliesWithoutChildren = 0,
                 Tax_BaseScale = structure(c(0, 14000, 48000, 70000, 180000, 0.105, 0.175, 0.3, 0.33, 0.39), dim = c(5L, 2L)))
 
   return(params)
