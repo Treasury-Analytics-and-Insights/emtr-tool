@@ -7,4 +7,4 @@ Currently under development @ The Treasury - New Zealand
 2. Use `httpuv::runStaticServer("docs")` to run the static web app
 
 ## Github Pages
-[Click here](https://tsylbarnes.github.io/emtr-tool/) to view a deployed version of the app on Github pages
+[Click here](https://treasury-analytics-and-insights.github.io/emtr-tool/) to view a deployed version of the app on Github pages
